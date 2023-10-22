@@ -1,0 +1,39 @@
+name: Deploy to Render
+
+on:
+  push:
+    branches:
+      - main  # Adjust this branch as needed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.11 # Replace with your Python version
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt  # Replace with your requirements file
+      
+    - name: Build Docker image
+      run: |
+        docker build -t company_bankruptcy_predictor:latest .
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        docker tag company_bankruptcy_predictor:latest sayam2801/company_bankruptcy_predictor:latest
+        docker push sayam2801/company_bankruptcy_predictor:latest
+
+    - name: Deploy to Render
+      run: |
+        curl -X POST -H "Authorization: Bearer ${{ secrets.RENDER_TOKEN }}" \
+          -H "Content-Type: application/json" \
+          --data '{
+            "image": "company_bankruptcy_predictor:latest",
+            "serviceId": "srv-ckl722rj89us73coe160"  # Replace with your Render service ID
+          }' \
+          https://api.render.com/v1/deploys

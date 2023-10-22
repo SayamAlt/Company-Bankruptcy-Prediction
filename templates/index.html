@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Bankruptcy Prediction</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #85f2f6;
+        }
+        .navbar-brand {
+            display: block;
+            margin: auto;
+            color: #4c118a;
+            font-weight: bold;
+            font-family: "Helvetica";
+        }
+        .submit-button {
+            display: block;
+            margin: auto;
+        }
+        p {
+            text-align: center;
+        }
+        p:hover {
+            filter: brightness(250%) saturate(100%);
+        }
+        .card {
+            display: block;
+            margin: auto;
+            text-align: center;
+        }
+        h5 {
+            font-weight: bold;
+            font-family: "Helvetica",sans;
+            color: #9c3803;
+            font-size: 1.8rem;
+        }
+        h1{
+            color: #0c6709;
+            font-family: 'Georgia', serif;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+        .first_row {
+            margin-top: 5rem;
+        }
+        .last_row {
+            margin-bottom: 2rem;
+        }
+        .card {
+            margin: 0 auto;
+            float: none;
+            margin-bottom: 10px;
+            background-color: #c4d80d;
+            border: 2px solid #220254;
+            border-width: 0.5rem;
+            size: 6rem;
+        }
+        .copyright{
+            color: #ca0c7b;
+            font-size: 1.5rem;
+            font-family: 'Arial',sans-serif;
+            font-weight: bold;
+        }
+        .predict-dec {
+            text-align: center;
+            font-weight: bold;
+            color: #5c2f03;
+            font-size: 2rem;
+            font-family: 'Helvetica',sans-serif;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <span class="navbar-brand mb-0 h1"><h1>Company Bankruptcy Prediction</h1></span>
+    </nav>
+    <div class="container">
+        <form action="/predict" method="post">
+            <div class="row first_row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Working Capital / Equity:</h5>
+                            <input type="number" min="0" max="1" step="0.001" name="working_capital_equity" id="working_capital_equity" required="required">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Persistent EPS(Earnings per Share) in the last four seasons:</h5>
+                            <input type="number" min="0" max="1" step="0.001" name="persistent_eps_in_last_4_seasons" id="persistent_eps_in_last_4_seasons" required="required">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Borrowing Dependency:</h5>
+                            <input type="number" min="0" max="1" step="0.001" name="borrowing_dependency" id="borrowing_dependency" required="required">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Net Value Growth Rate:</h5>
+                            <input type="number" min="0" max="9330000000" step="0.0001" name="net_value_growth_rate" id="net_value_growth_rate" required="required">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row"> 
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Interest-Bearing Debt Interest Rate:</h5>
+                            <input type="number" min="0" max="990000000" step="0.0001" name="interest_bearing_debt_interest_rate" id="interest_bearing_debt_interest_rate" required="required">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Return on Assets (ROA) Before Interest and Depreciation Before Interest:</h5>
+                            <input type="number" min="0" max="1" step="0.001" name="roa_c_before_interest_and_depreciation_before_interest" id="roa_c_before_interest_and_depreciation_before_interest" required="required">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-body">
+                                <h5 class="card-title">Cash / Total Assets:</h5>
+                                <input type="number" min="0" max="1" step="0.001" name="cash_total_assets" id="cash_total_assets" required="required">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Non-Industry Income and Expenditure / Revenue:</h5>
+                            <input type="number" min="0" max="1" step="0.001" name="non_industry_income_and_expenditure_revenue" id="non_industry_income_and_expenditure_revenue" required="required">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Net Value per Share:</h5>
+                            <input type="number" min="0" max="1" step="0.001" name="net_value_per_share_b" id="net_value_per_share_b" required="required">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Debt / Total Net Worth:</h5>
+                            <input type="number" min="0" max="9940000000" step="0.001" name="total_debt_total_net_worth" id="total_debt_total_net_worth" required="required">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+            <!-- Submit -->
+            <input type="submit" value="Submit" class="btn btn-primary submit-button">
+        </form>
+        <br>
+        <h3 class="predict-dec">{{ prediction_text }}</h3> 
+        <br>
+        <p class="copyright">Copyrights 2023 Sayam Kumar</p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+</body>
+</html>
