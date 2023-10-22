@@ -45,7 +45,6 @@ def predict():
                  net_value_per_share_b,
                  total_debt_total_net_worth]],columns=cols)
         pred = pipeline.predict(data)
-        print(pred)
         if pred == 0:
             return render_template('index.html',prediction_text="The company with the specified details will not become bankrupt.")
         elif pred == 1:
